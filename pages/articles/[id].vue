@@ -1,29 +1,37 @@
 <script setup lang="ts">
 import {ref} from "vue";
-import axios from "axios";
 import 'video.js/dist/video-js.css'
-const route = useRoute()
-const files = ref([]);
+import Video from "~/components/Video.vue";
+import axios from "axios";
 
-const getFiles = async () => {
+const route = useRoute()
+
+const folder = ref(route.params.id);
+const param = ref(route.query.q);
+
+const file = ref([]);
+
+const getFile = async () => {
 	const {data} = await axios.get('/api/files', {
 		params: {
-			folder: route.params.id
+			folder: folder
 		}
 	});
-	files.value = data;
+	file.value = data.find(record => record['name'] === param);
 };
 
 onMounted(() => {
-	getFiles();
+	getFile();
 });
 
 </script>
 
 <template>
-<div>
-	123
-</div>
+	<div>
+		<Video
+			:file="file"
+		></Video>
+	</div>
 </template>
 
 <style scoped>

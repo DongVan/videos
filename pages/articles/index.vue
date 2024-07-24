@@ -5,13 +5,12 @@ import axios from "axios";
 import 'video.js/dist/video-js.css';
 
 const route = useRoute();
-
 const files = ref([]);
 
 const getFiles = async () => {
 	const {data} = await axios.get('/api/files', {
 		params: {
-			folder: route.params.id
+			folder: route.query.q
 		}
 	});
 	files.value = data;
@@ -20,6 +19,7 @@ const getFiles = async () => {
 onMounted(() => {
 	getFiles();
 });
+
 </script>
 
 <template>
@@ -27,7 +27,6 @@ onMounted(() => {
 		<div class="grid grid-cols-3 ga-4 text-[14px]">
 			<ListVideos
 				:files="files"
-				@update-files="(val) => files.value = val"
 			></ListVideos>
 		</div>
 	</div>

@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap');
+
+html {
+    overflow: auto !important;
+}
+
+body {
+    height: 100%;
+    font-family: 'Comfortaa', sans-serif;
+}
+
+html,
+body,
+#__nuxt,
+#__nuxt .v-application,
+{
+    height: 100%;
+}
+
+#__nuxt {
+    height: 100%;
+
+    .v-application {
+        height: 100%;
+
+        &__wrap {
+            height: 100%;
+
+            .wrapper-box {
+                height: 100%;
+
+                .main {
+                    height: calc(100% - 72px);
+                    background: #fafafa;
+                }
+            }
+        }
+    }
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 15px;
+}
+
+.vjs-poster {
+    background-size: cover !important;
+}
+
+.page-enter-active,
+.page-leave-active {
+    transition: all 0.4s;
+}
+
+.page-leave-to {
+    opacity: 0;
+    transform: translate(-50px, 0);
+}
+
+.page-enter-from {
+    opacity: 0;
+    transform: translate(-50px, 0);
+}
+
+@media (max-width: 1200px) {
+    .container {
+        max-width: 100%;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 992px) {
+    .container {
+        max-width: 100%;
+        padding: 8px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        max-width: 100%;
+        padding: 5px;
+    }
+}
+
+/* Mobile (max-width: 576px) */
+@media (max-width: 576px) {
+    .container {
+        max-width: 100%;
+        padding: 3px;
+    }
+}
+
+/* Extra small mobile (max-width: 375px) */
+@media (max-width: 375px) {
+    .container {
+        max-width: 100%;
+        padding: 2px;
+    }
+}
+
+/* Very small mobile (max-width: 320px) */
+@media (max-width: 320px) {
+    .container {
+        max-width: 100%;
+        padding: 1px;
+    }
+}

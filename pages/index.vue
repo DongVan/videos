@@ -3,7 +3,9 @@
 </script>
 
 <template>
-  $END$
+	<div class="container py-[15px]">
+		HOME PAGE
+	</div>
 </template>
 
 <style scoped>
