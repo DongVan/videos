@@ -1,6 +1,10 @@
 import vuetify, {transformAssetUrls} from 'vite-plugin-vuetify'
 
 export default defineNuxtConfig({
+    server: {
+        port: 3000,
+        host: '0.0.0.0'
+    },
     compatibilityDate: '2024-04-03',
     devtools: {enabled: true},
     build: {
@@ -38,4 +42,5 @@ export default defineNuxtConfig({
         { path: '/api/files', handler: '~/server/api/files.js' },
         { path: '/api/rename', handler: '~/server/api/rename.js' }
     ],
+
 })

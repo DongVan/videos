@@ -32,6 +32,8 @@ export default defineEventHandler(async (event) => {
 			name = parentFolder !== 'files' ? `${parentFolder}\\${name}` : name;
 			return {
 				name: name,
+				folder: parentFolder,
+				sortName: path.basename(file),
 				path: file,
 				size: fs.statSync(file).size,
 				type: path.extname(file),

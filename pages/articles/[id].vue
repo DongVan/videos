@@ -11,13 +11,32 @@ const param = ref(route.query.q);
 
 const file = ref([]);
 
+const breadcrumbs =  [
+	{
+		title: 'Home',
+		disabled: false,
+		href: '/',
+	},
+	{
+		title: 'Articles',
+		disabled: false,
+		href: `/articles`,
+	},
+	{
+		title: param.value,
+		disabled: true,
+		href: '',
+	},
+];
+
 const getFile = async () => {
 	const {data} = await axios.get('/api/files', {
 		params: {
-			folder: folder
+			folder: folder.value
 		}
 	});
-	file.value = data.find(record => record['name'] === param);
+
+	file.value = data.find(record => record['sortName'] === param.value);
 };
 
 onMounted(() => {
@@ -27,9 +46,19 @@ onMounted(() => {
 </script>
 
 <template>
-	<div>
+	<div class="container">
+		<v-breadcrumbs :items="breadcrumbs">
+			<template v-slot:divider>
+				<v-icon icon="mdi-menu-right"></v-icon>
+			</template>
+		</v-breadcrumbs>
+
 		<Video
+			class="w-full h-[400px]"
 			:file="file"
+			:setting="{
+				hideLabel: true
+			}"
 		></Video>
 	</div>
 </template>
