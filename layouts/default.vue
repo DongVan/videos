@@ -1,23 +1,17 @@
 <script setup lang="ts">
-
-import MobileIcon from "~/components/layouts/MobileIcon.vue";
+import BottomNavbar from "~/components/layouts/BottomNavbar.vue";
+import TopNavbar from "~/components/layouts/TopNavbar.vue";
 </script>
 
 <template>
 	<div class="wrapper-box">
-		<div class="shadow-sm">
-			<div class="relative container flex p-2 ga-12 leading-[42px] m-auto">
+		<TopNavbar></TopNavbar>
 
-				<MobileIcon></MobileIcon>
-
-				<NuxtLink to="/" class="m-auto">
-					<v-img src="/photos/icon.png" width="40" height="40"></v-img>
-				</NuxtLink>
-			</div>
-		</div>
 		<div class="main">
 			<slot/>
 		</div>
+
+		<BottomNavbar></BottomNavbar>
 	</div>
 </template>
 
