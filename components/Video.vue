@@ -14,7 +14,7 @@ const props = defineProps({
 	}
 });
 
-const emit = defineEmits(['updateFile']);
+const emit = defineEmits(['updateFile', 'openDetails']);
 
 const menu = ref(false);
 const name = ref(props.file.name || '');
@@ -49,7 +49,7 @@ const rename = async () => {
 			controls
 			:loop="true"
 			:muted="true"
-			:height="setting.height"
+			:height="setting.height ? setting.height :  400"
 		/>
 		<template v-if="!setting || !setting.hideLabel">
 			<p class="mt-2 mb-2 text-center truncate">{{ file['name'] }}</p>
@@ -60,16 +60,14 @@ const rename = async () => {
 					:close-on-content-click="false"
 				>
 					<template v-slot:activator="{ props }">
-						<NuxtLink :to="`articles/${file['folder']}?q=${file['sortName']}`">
-							<v-btn
-								class="mr-2"
-								variant="outlined"
-								flat
-							>
-								Details
-							</v-btn>
-						</NuxtLink>
-
+						<v-btn
+							class="mr-2"
+							variant="outlined"
+							flat
+							@click="emit('openDetails', file)"
+						>
+							Details
+						</v-btn>
 						<v-btn
 							color="primary"
 							v-bind="props"

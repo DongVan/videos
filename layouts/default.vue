@@ -7,9 +7,7 @@ import MobileIcon from "~/components/layouts/MobileIcon.vue";
 	<div class="wrapper-box">
 		<div class="shadow-sm">
 			<div class="relative container flex p-2 ga-12 leading-[42px] m-auto">
-
-				<MobileIcon></MobileIcon>
-
+<!--				<MobileIcon></MobileIcon>-->
 				<NuxtLink to="/" class="m-auto">
 					<v-img src="/photos/icon.png" width="40" height="40"></v-img>
 				</NuxtLink>

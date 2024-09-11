@@ -2,6 +2,7 @@
 
 import _ from 'lodash';
 import Video from "~/components/Video.vue";
+import Dialog from "~/components/ui/Dialog.vue";
 
 const props = defineProps({
 	files: Object
@@ -11,34 +12,36 @@ const search = ref('');
 
 const headers = [{
 	key: 'name',
-}]
+}];
 
 const updateFiles = (index, newName) => {
 	let result = _.cloneDeep(props.files);
 	result[index]['name'] = newName;
 	emit('updateFiles', result);
+};
+
+const dialog = ref(false);
+const selected = ref({});
+
+const openDetail = (item) => {
+	dialog.value = true;
+	selected.value = item;
 }
 
 </script>
 
 <template>
 	<div>
-		<div class="p-3 bg-white">
-			<div class="float-left">
-				<span class="text-[30px] font-bold">VIDEOS</span>
-			</div>
-			<div class="float-right w-[300px]">
-				<v-text-field
-					v-model="search"
-					label="Search ..."
-					prepend-inner-icon="mdi-magnify"
-					variant="outlined"
-					hide-details
-					single-line
-					density="comfortable"
-				></v-text-field>
-			</div>
-			<div class="clear-both"></div>
+		<div class="w-full mt-1 mb-3">
+			<v-text-field
+				v-model="search"
+				label="Search ..."
+				prepend-inner-icon="mdi-magnify"
+				variant="outlined"
+				hide-details
+				single-line
+				density="comfortable"
+			></v-text-field>
 		</div>
 
 		<v-data-table
@@ -46,28 +49,43 @@ const updateFiles = (index, newName) => {
 			:headers="headers"
 			:items="files"
 			class="videos-table w-full"
-			:items-per-page="9"
+			:items-per-page="20"
 			hide-default-header
+			width="100%"
 		>
 			<template v-slot:item.name="{ item, index }">
-				<v-card class="my-2" elevation="2" rounded>
-					<Video
-						:file="item"
-						:setting="{
-					        height: '200px'
-						}"
-						@update-file="(newName) => updateFiles(index, newName)"
-					></Video>
+				<v-card class="my-2">
+					<template v-if="item.path.indexOf('.mp4') !== -1">
+						<Video
+							:file="item"
+							:setting="{
+						        height: 200
+							}"
+							@update-file="(newName) => updateFiles(index, newName)"
+							@open-details="openDetail"
+						></Video>
+					</template>
+					<template v-else>
+						<v-img
+							width="100%"
+							aspect-ratio="16/9"
+							cover
+							:src="`/files/${item['name']}`"
+							@click="openDetail(item)"
+						></v-img>
+					</template>
 				</v-card>
 			</template>
 		</v-data-table>
 	</div>
+
+	<Dialog v-model:dialog="dialog" :item="selected"></Dialog>
 </template>
 
 <style>
 .videos-table table tbody {
 	display: grid;
-	grid-template-columns: repeat(3, minmax(0, 1fr));
+	grid-template-columns: repeat(2, minmax(0, 1fr));
 	gap: 12px;
 }
 
@@ -77,7 +95,7 @@ const updateFiles = (index, newName) => {
 }
 
 .videos-table table tbody tr.v-data-table-rows-no-data {
-	width: 300%;
+	width: 200%;
 }
 
 .videos-table table tbody tr.v-data-table-rows-no-data td {

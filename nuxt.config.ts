@@ -15,7 +15,10 @@ export default defineNuxtConfig({
                 config.plugins.push(vuetify({autoImport: true}))
             })
         },
-        '@nuxtjs/tailwindcss'
+        '@nuxtjs/tailwindcss',
+    ],
+    buildModules: [
+        '@nuxtjs/pwa',
     ],
     vite: {
         vue: {
@@ -42,4 +45,31 @@ export default defineNuxtConfig({
         port: 8000,
         host: '0.0.0.0',
     },
+    pwa: {
+        manifest: {
+            name: 'My PWA App',
+            short_name: 'PWA',
+            lang: 'en',
+            display: 'standalone',
+            theme_color: '#4DBA87',
+            background_color: '#ffffff'
+        },
+        workbox: {
+            // Các tùy chọn cấu hình Workbox, ví dụ:
+            // offline: true,
+            // offlineStrategy: 'CacheFirst',
+        },
+        meta: {
+            mobileApp: true,
+            mobileAppIOS: true,
+            appleStatusBarStyle: 'black-translucent',
+            favicon: true,
+            name: 'My PWA App',
+            author: 'Me',
+            theme_color: '#4DBA87',
+            ogHost: 'https://my-nuxt-pwa-app.com',
+            ogImage: '/preview.png',
+            nativeUI: true,
+        },
+    }
 })

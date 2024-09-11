@@ -39,7 +39,7 @@ body,
 }
 
 .container {
-    max-width: 1200px;
+    max-width: 680px;
     margin: 0 auto;
     padding: 15px;
 }
@@ -47,8 +47,6 @@ body,
 .vjs-poster {
     background-size: cover !important;
 }
-
-
 
 @media (max-width: 1200px) {
     .container {
